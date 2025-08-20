@@ -13,6 +13,7 @@ const cache = require('gulp-cache');
 const clean = require('gulp-clean');
 const webp = require('gulp-webp');
 
+
 const paths = {
     scss: 'src/scss/**/*.scss',
     js: 'src/js/**/*.js',
@@ -43,7 +44,7 @@ function imagenes() {
     return src(paths.imagenes)
         .pipe(cache(imagemin({ optimizationLevel: 3 })))
         .pipe(dest('build/img'))
-        .pipe(notify('Imagen Completada' ));
+        .pipe(notify({ message: 'Imagen Completada' } ));
 }
 
 function versionWebp() {

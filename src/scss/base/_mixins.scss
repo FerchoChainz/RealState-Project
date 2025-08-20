@@ -1,18 +1,20 @@
 /** Media Queries **/
+@use 'variables' as v;
+
 @mixin telefono {
-    @media (min-width: #{$phone}) {
+    @media (min-width: #{v.$phone}) {
         @content;
     }
 }
 
 @mixin tablet {
-    @media (min-width: #{$tablet}) {
+    @media (min-width: #{v.$tablet}) {
         @content;
     }
 }
   
 @mixin desktop {
-    @media (min-width: #{$desktop}) {
+    @media (min-width: #{v.$desktop}) {
         @content;
     }
 }
