@@ -21,6 +21,12 @@
         @include m.tablet{
             min-height: 70rem;
         }
+
+        .header-content{
+            @include m.tablet{
+            min-height: 70rem;
+        }
+        }
     }
 
     .header-content{
