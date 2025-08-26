@@ -21,6 +21,12 @@
     }
 }
 
+.meta-info{
+    span{
+        color: v.$yellow;
+    }
+}
+
 .text-entry{
     a{
         color: v.$black;
@@ -44,9 +50,5 @@
             background-color: v.$green;
             margin-top: 1rem;
         }
-    }
-
-    span{
-        color: v.$yellow;
     }
 }

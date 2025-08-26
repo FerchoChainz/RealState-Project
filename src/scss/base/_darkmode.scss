@@ -1,0 +1,36 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.dark-mode{
+    background-color: darken(v.$black,10);
+
+    p,a,h1,h2,h3,h4 {
+        color: v.$white;
+    }
+
+    .adds{
+        background-color: v.$darkGrey ;
+        border: 1px solid v.$black;
+
+        .price{
+            color: v.$green;
+        }
+    }
+
+    .text-about blockquote{
+        color: v.$white;
+    }
+
+
+    .form{
+        legend,
+        label,
+        p{
+            color: v.$white;
+        }
+    }
+
+    .footer{
+        border: 1px solid v.$darkGrey;
+    }
+}

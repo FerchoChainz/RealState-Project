@@ -1,22 +1,57 @@
 @use 'base/mixins' as m;
 @use 'base/variables' as v;
 
+
+.right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include m.tablet{
+        align-items: flex-end;
+    }
+
+    .dark-mode-btn{
+        width: 3rem;
+        margin-top: 3rem;
+        margin-bottom:2rem;
+        filter: invert(100%);
+
+        @include m.tablet{
+            margin-top: 0;
+        }
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
 .bar {
     display: flex;
     flex-direction: column;
     padding-top: 3rem;
-
+    align-items: center;
+    
     @include m.tablet{
         flex-direction: row;
         justify-content: space-between;
+        align-items: flex-end;
     }
 }
 
 .navegation {
 
+    visibility: hidden;
+    height: 0;
+    opacity: 0;
+    transition: visibility .3s ease-in-out, opacity 0.4s linear, height .5s linear;
+
     @include m.tablet{
         display: flex;
         align-items: center;
+        opacity: 1;
+        visibility: visible;
     }
 
     a{
@@ -35,4 +70,25 @@
         }
     }
 
+}
+
+// Menu movil
+.mobile-menu{
+    @include m.tablet{
+       display: none; 
+    }
+
+    img{
+        width: 5rem;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+}
+
+.show{
+    visibility: visible;
+    opacity: 1;
+    height: auto;
 }

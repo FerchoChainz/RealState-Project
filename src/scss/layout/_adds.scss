@@ -10,26 +10,31 @@
 .adds{
     background-color: v.$grey;
     border: 1px solid  v.$darkGrey;
+    margin-bottom: 2rem;
+
+
+    .add-content{
+        padding: 2rem;
+    
+        h3,p{
+            margin: 0;
+        }
+    
+    }
 }
 
-.add-content{
-    padding: 2rem;
 
-    h3,p{
-        margin: 0;
-    }
-
-    .price{
-        color: v.$green;
-        font-weight: v.$bold;
-        font-size: 3rem;
-    }
+.price{
+    color: v.$green;
+    font-weight: v.$bold;
+    font-size: 3rem;
 }
 
 .icons-specifics{
     display: flex;
     list-style: none;
     padding: 0;
+    max-width: 40rem;
     
     li{
         flex: 1;

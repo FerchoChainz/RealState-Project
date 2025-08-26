@@ -34,8 +34,10 @@
     margin-top: v.$gap / 2;
     border-radius: 3px;
     display: $display;
+    border: none;
 
     &:hover{
         background-color: v.$darkYellow;
+        cursor: pointer;
     }
 }

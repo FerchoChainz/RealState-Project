@@ -2,7 +2,7 @@
 @use 'base/variables' as v;
 
 .footer{
-    background-color: v.$darkGrey;
+    background-color: v.$black;
     padding: v.$gap / 2 0;
     margin-bottom: 0;
 
@@ -10,8 +10,14 @@
         margin-top: v.$gap;
     }
 
+    
     .copyright{
         color: v.$white;
         text-align: center;
+    }
+    .navegation{
+        visibility: visible;
+        opacity: 1;
+        height: auto;
     }
 }
