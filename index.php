@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="build/css/app.css" />
-    <title>RealState</title>
-  </head>
-  <body>
+<?php
 
-    <header class="header main">
-      <div class="container header-content">
-        <div class="bar">
-          <a href="/">
-            <img src="build/img/logo.svg" alt="imagen logotipo" />
-          </a>
-
-          <div class="mobile-menu">
-            <img src="build/img/barras.svg" alt="Icon">
-          </div>
+declare(strict_types=1);
 
 
-          <div class="right">
-            <img src="build/img/dark-mode.svg" alt="darkmode icon" class="dark-mode-btn">
-
-
-            <nav class="navegation">
-              <a href="about.html">About us</a>
-              <a href="adds.html">Advertisements</a>
-              <a href="blog.html">Blog</a>
-              <a href="contact.html">Contact</a>
-            </nav>
-          </div>
-        </div>
-        <!-- CIERRE DE BARRA-->
-
-        <h1>Venta de casas y departamentos exclusivos de lujo</h1>
-      </div>
-    </header>
+require 'includes/functions.php';
+addTemplate('header',$main = true);
+?>
 
 
     <main class="container section">
@@ -92,7 +61,7 @@
                 </li>
               </ul>
 
-               <a href="add.html" class="button yellow-btn-b">View Property</a>
+               <a href="add.php" class="button yellow-btn-b">View Property</a>
 
             </div><!--content-adds-->
           </div> <!--Adds-->
@@ -124,7 +93,7 @@
                 </li>
               </ul>
 
-               <a href="add.html" class="button yellow-btn-b">View Property</a>
+               <a href="add.php" class="button yellow-btn-b">View Property</a>
 
             </div><!--content-adds-->
           </div> <!--Adds-->
@@ -155,14 +124,14 @@
                 </li>
               </ul>
 
-               <a href="add.html" class="yellow-btn-b">View Property</a>
+               <a href="add.php" class="yellow-btn-b">View Property</a>
 
             </div><!--content-adds-->
           </div> <!--Adds-->
         </div><!--container-adds-->
 
          <div class="align-right">
-          <a href="adds.html" class="green-btn">See all</a>
+          <a href="adds.php" class="green-btn">See all</a>
          </div>
       </section>
 
@@ -170,7 +139,7 @@
       <section class="contact-img">
         <h2>Found your dreamed house</h2>
         <p>Fill out this contact form and an advisor will contact you shortly.</p>
-        <a href="contact.html " class="yellow-btn">Contact us</a>
+        <a href="contact.php " class="yellow-btn">Contact us</a>
       </section>
 
 
@@ -188,7 +157,7 @@
             </div>
 
             <div class="text-entry">
-              <a href="entry.html">
+              <a href="entry.php">
                 <h4>Terraza en el techo de tu casa</h4>
                 <p>Escrito el: <span>20/10/2025 </span>por: <span>Admin</span></p>
 
@@ -208,7 +177,7 @@
             </div>
 
             <div class="text-entry">
-              <a href="entry.html">
+              <a href="entry.php">
                 <h4>Guia para la decoracion de tu hogar</h4>
                 <p>Escrito el: <span>20/10/2025 </span>por: <span>Admin</span></p>
                 
@@ -232,19 +201,4 @@
         </section>
       </div>
 
-    <footer class="footer section">
-        <div class="container footer-content">
-            <nav class="navegation">
-            <a href="about.html">About us</a>
-            <a href="adds.html">Advertisements</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-          </nav>
-        </div>
-
-        <p class="copyright">Todos los derechos reservados 2026 &copy;</p>
-    </footer>
-
-    <script src="build/js/bundle.min.js"></script>
-  </body>
-</html>
+<?php addTemplate('footer'); ;?>

@@ -1,40 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="build/css/app.css" />
-    <title>About us</title>
-  </head>
-  <body>
-    <header class="header">
-      <div class="container header-content">
-        <div class="bar">
-          <a href="/">
-            <img src="build/img/logo.svg" alt="imagen logotipo" />
-          </a>
-
-          <div class="mobile-menu">
-            <img src="build/img/barras.svg" alt="Icon">
-          </div>
-
-
-          <div class="right">
-            <img src="build/img/dark-mode.svg" alt="darkmode icon" class="dark-mode-btn">
-
-
-            <nav class="navegation">
-              <a href="about.html">About us</a>
-              <a href="adds.html">Advertisements</a>
-              <a href="blog.html">Blog</a>
-              <a href="contact.html">Contact</a>
-            </nav>
-          </div>
-        </div>
-        <!-- CIERRE DE BARRA-->
-      </div> 
-    </header>
-
+<?php 
+require 'includes/functions.php';
+addTemplate('header');
+?>
 
     <main class="container section">
         <h1>Know About Us</h1>
@@ -83,19 +50,4 @@
         </div>
       </section>
 
-    <footer class="footer section">
-        <div class="container footer-content">
-            <nav class="navegation">
-            <a href="about.html">About us</a>
-            <a href="adds.html">Advertisements</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-          </nav>
-        </div>
-
-        <p class="copyright">Todos los derechos reservados 2026 &copy;</p>
-    </footer>
-
-    <script src="build/js/bundle.min.js"></script>
-  </body>
-</html>
+<?php addTemplate('footer'); ;?>
