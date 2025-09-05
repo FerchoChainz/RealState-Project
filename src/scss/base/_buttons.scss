@@ -12,3 +12,15 @@
 .green-btn{
     @include m.button(v.$green, inline-block)
 }
+
+.red-btn-b{
+    @include m.button(v.$red, block)
+}
+
+.green-btn-b{
+    @include m.button(v.$green, block)
+}
+
+.blue-btn-b{
+    @include m.button(v.$light-blue, block)
+}

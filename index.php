@@ -201,4 +201,5 @@ addTemplate('header',$main = true);
         </section>
       </div>
 
+
 <?php addTemplate('footer'); ;?>

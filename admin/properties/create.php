@@ -9,6 +9,9 @@ $result = mysqli_query($db, $query);
 // array error logs
 $errors = [];
 
+
+// Log errors
+
 $tittle = '';
 $price = '';
 $description = '';
@@ -20,14 +23,6 @@ $seller = '';
 // exect after user send form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // echo "<pre>";
-    // var_dump($_POST);
-    // echo "</pre>";
-
-    // para imagenes
-    echo "<pre>";
-    var_dump($_FILES);
-    echo "</pre>";
 
     // Sanitize inputs
     $tittle = mysqli_real_escape_string($db,$_POST['tittle']); 
@@ -52,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Price cant be empty';
     }
 
-    if (strlen($description) < 50) {
+    if (!$description) {
         $errors[] = 'Description cant be empty and it must be at least 50 characters';
     }
 
@@ -105,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         
         // Insert DB
-        $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
+        $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
 
         // echo $query;
 
@@ -184,4 +179,4 @@ addTemplate('header');
     </form>
 </main>
 
-<?php addTemplate('footer');; ?>
+<?php addTemplate('footer'); ?>
