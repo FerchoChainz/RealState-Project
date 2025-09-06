@@ -7,7 +7,7 @@
     font-weight: bold;
     text-transform: uppercase;
     margin: 1rem 0;
-
+    border-radius: 5px;
     &.error{
         background-color: v.$red;
     }
@@ -15,6 +15,14 @@
 
     &.succes{
         background-color: v.$green;
+    }
+
+    &.updated{
+        background-color: v.$light-blue;
+    }
+
+    &.deleted{
+        background-color: v.$light-red;
     }
 }
 

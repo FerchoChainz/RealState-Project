@@ -3,9 +3,9 @@
 
 // Validate valid ID
 $id = $_GET['id'];
-$id = filter_var($id,FILTER_VALIDATE_INT);
+$id = filter_var($id, FILTER_VALIDATE_INT);
 
-if(!$id){
+if (!$id) {
     header('Location: /admin');
 }
 
@@ -16,12 +16,10 @@ $db = DBconn();
 
 // Query form properties
 $query = "SELECT * FROM properties WHERE id = $id ";
-$result = mysqli_query($db,$query);
+$result = mysqli_query($db, $query);
 $propertie = mysqli_fetch_assoc($result);
 
-echo "<pre>";
-var_dump($propertie);
-echo "</pre>";
+
 
 // query for sellers
 $query = "SELECT * FROM sellers";
@@ -44,15 +42,19 @@ $propertieImage = $propertie['image'];
 // exect after user send form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";
+
 
     // Sanitize inputs
-    $tittle = mysqli_real_escape_string($db,$_POST['tittle']); 
-    $price = mysqli_real_escape_string($db,$_POST['price']); 
-    $description = mysqli_real_escape_string($db,$_POST['description']); 
-    $rooms = mysqli_real_escape_string($db,$_POST['rooms']); 
-    $wc = mysqli_real_escape_string($db,$_POST['wc']); 
-    $parking = mysqli_real_escape_string($db,$_POST['parking']); 
-    $seller = mysqli_real_escape_string($db,$_POST['seller']); 
+    $tittle = mysqli_real_escape_string($db, $_POST['tittle']);
+    $price = mysqli_real_escape_string($db, $_POST['price']);
+    $description = mysqli_real_escape_string($db, $_POST['description']);
+    $rooms = mysqli_real_escape_string($db, $_POST['rooms']);
+    $wc = mysqli_real_escape_string($db, $_POST['wc']);
+    $parking = mysqli_real_escape_string($db, $_POST['parking']);
+    $seller = mysqli_real_escape_string($db, $_POST['seller']);
     $created = date('Y/m/d');
 
     // asign files to a variable
@@ -88,14 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Select one selller';
     }
 
-    if(!$image['name'] || $image['error']){
-        $errors[] = 'Image is mandatory';
-    }
-
     // Image size validator (1 MB max)
     $messure = 1000 * 1000;
 
-    if($image['size'] > $messure){
+    if ($image['size'] > $messure) {
         $errors[] = 'Image is so big, upload another';
     }
 
@@ -103,25 +101,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // review if error logs is empty
     if (empty($errors)) {
 
-        // uploading files
         // make directory
         $dirImages = '../../images/';
 
-        if(!is_dir($dirImages)){
+        if (!is_dir($dirImages)) {
             // if not exist, make it
             mkdir($dirImages);
         }
 
-        // generate unique name to images
-        $nameImage = md5(uniqid(rand(), true)) . ".jpg";
-        // var_dump($nameImage);
+        $nameImage = '';
 
-        // upload image
-        move_uploaded_file($image['tmp_name'], $dirImages . $nameImage);
 
-        
-        // Insert DB
-        $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
+        // updating images and deleting in server
+        if ($image['name']) {
+            // if new image exist, delete the past image
+
+            unlink($dirImages . $propertie['image']);
+
+
+            // generate unique name to images
+            $nameImage = md5(uniqid(rand(), true)) . ".jpg";
+
+            // var_dump($nameImage);
+
+            // upload image
+            move_uploaded_file($image['tmp_name'], $dirImages . $nameImage);
+        } else {
+            $nameImage = $propertie['image'];
+        }
+
+
+        // Update DB
+        $query = " UPDATE properties SET tittle = '$tittle', price = '$price', image = '$nameImage', description = '$description', rooms = $rooms, wc = $wc, parking = $parking, sellers_id = $seller WHERE id = $id";
 
         // echo $query;
 
@@ -129,10 +140,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result) {
             // Redirection
-            header('location: /admin?result=1');
+            header('location: /admin?result=2');
         }
     }
 }
+
 
 
 require '../../includes/functions.php';
@@ -150,7 +162,7 @@ addTemplate('header');
         </div>
     <?php endforeach; ?>
 
-    <form class="form" method="POST" action="/admin/properties/create.php" enctype="multipart/form-data">
+    <form class="form" method="POST" enctype="multipart/form-data">
         <fieldset>
             <legend>General Info</legend>
 
@@ -186,14 +198,14 @@ addTemplate('header');
 
             <select name="seller">
                 <option value="">--SELECT--</option>
-                <?php while($row = mysqli_fetch_assoc($result)) :?>
-                    <option 
-                    <?php echo $seller === $row['id'] ? 'selected' :'' ;?>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <option
+                        <?php echo $seller === $row['id'] ? 'selected' : ''; ?>
                         value="<?php echo $row['id'] ?>">
 
 
-                    <?php echo $row['name'] . " " . $row['last_name'];?>
-                </option>
+                        <?php echo $row['name'] . " " . $row['last_name']; ?>
+                    </option>
                 <?php endwhile ?>
             </select>
         </fieldset>

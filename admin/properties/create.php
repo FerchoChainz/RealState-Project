@@ -102,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insert DB
         $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
 
-        // echo $query;
 
         $result = mysqli_query($db, $query);
 

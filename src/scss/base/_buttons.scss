@@ -14,7 +14,8 @@
 }
 
 .red-btn-b{
-    @include m.button(v.$red, block)
+    @include m.button(v.$red, block);
+    width: 100%;
 }
 
 .green-btn-b{
