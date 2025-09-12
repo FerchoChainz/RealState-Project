@@ -32,5 +32,14 @@
           </div>
         </div>
         <!-- CIERRE DE BARRA-->
+
+
+        <?php 
+        
+        if($main){
+          echo "<h1>Venta de casas y departamentos exclusivos de lujo. </h1>";
+        }
+        
+        ?>
       </div>
     </header>

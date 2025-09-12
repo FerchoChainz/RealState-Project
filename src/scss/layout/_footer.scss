@@ -3,7 +3,7 @@
 
 .footer{
     background-color: v.$black;
-    padding: v.$gap / 2 0;
+    padding: calc(v.$gap / 2);
     margin-bottom: 0;
 
     .footer-content{

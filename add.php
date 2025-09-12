@@ -22,9 +22,15 @@ $query = "SELECT * FROM properties WHERE id = $id ";
 // get results
 $result = mysqli_query($db, $query);
 
-echo "<pre>";
-var_dump($result);
-echo "</pre>";
+
+// redirect to main
+if(!$result -> num_rows){
+  header("Location: /");
+}
+
+// echo "<pre>";
+// var_dump($result);
+// echo "</pre>";
 
 $propertie = mysqli_fetch_assoc($result);
 
