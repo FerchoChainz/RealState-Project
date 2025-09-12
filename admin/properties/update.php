@@ -1,5 +1,13 @@
 <?php
 
+require '../../includes/functions.php';
+
+$auth = isAuth();
+
+if(!$auth){
+    header('Location: /');
+}
+
 
 // Validate valid ID
 $id = $_GET['id'];
@@ -147,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-require '../../includes/functions.php';
+
 addTemplate('header');
 ?>
 

@@ -1,5 +1,14 @@
 <?php
 
+require '../../includes/functions.php';
+
+$auth = isAuth();
+
+if (!$auth) {
+    header('Location: /');
+}
+
+
 require '../../includes/config/database.php';
 $db = DBconn();
 
@@ -25,13 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     // Sanitize inputs
-    $tittle = mysqli_real_escape_string($db,$_POST['tittle']); 
-    $price = mysqli_real_escape_string($db,$_POST['price']); 
-    $description = mysqli_real_escape_string($db,$_POST['description']); 
-    $rooms = mysqli_real_escape_string($db,$_POST['rooms']); 
-    $wc = mysqli_real_escape_string($db,$_POST['wc']); 
-    $parking = mysqli_real_escape_string($db,$_POST['parking']); 
-    $seller = mysqli_real_escape_string($db,$_POST['seller']); 
+    $tittle = mysqli_real_escape_string($db, $_POST['tittle']);
+    $price = mysqli_real_escape_string($db, $_POST['price']);
+    $description = mysqli_real_escape_string($db, $_POST['description']);
+    $rooms = mysqli_real_escape_string($db, $_POST['rooms']);
+    $wc = mysqli_real_escape_string($db, $_POST['wc']);
+    $parking = mysqli_real_escape_string($db, $_POST['parking']);
+    $seller = mysqli_real_escape_string($db, $_POST['seller']);
     $created = date('Y/m/d');
 
     // asign files to a variable
@@ -67,14 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Select one selller';
     }
 
-    if(!$image['name'] || $image['error']){
+    if (!$image['name'] || $image['error']) {
         $errors[] = 'Image is mandatory';
     }
 
     // Image size validator (1 MB max)
     $messure = 1000 * 1000;
 
-    if($image['size'] > $messure){
+    if ($image['size'] > $messure) {
         $errors[] = 'Image is so big, upload another';
     }
 
@@ -86,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // make directory
         $dirImages = '../../images/';
 
-        if(!is_dir($dirImages)){
+        if (!is_dir($dirImages)) {
             // if not exist, make it
             mkdir($dirImages);
         }
@@ -98,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // upload image
         move_uploaded_file($image['tmp_name'], $dirImages . $nameImage);
 
-        
+
         // Insert DB
         $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
 
@@ -113,7 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-require '../../includes/functions.php';
 addTemplate('header');
 ?>
 
@@ -162,14 +170,14 @@ addTemplate('header');
 
             <select name="seller">
                 <option value="">--SELECT--</option>
-                <?php while($row = mysqli_fetch_assoc($result)) :?>
-                    <option 
-                    <?php echo $seller === $row['id'] ? 'selected' :'' ;?>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <option
+                        <?php echo $seller === $row['id'] ? 'selected' : ''; ?>
                         value="<?php echo $row['id'] ?>">
 
 
-                    <?php echo $row['name'] . " " . $row['last_name'];?>
-                </option>
+                        <?php echo $row['name'] . " " . $row['last_name']; ?>
+                    </option>
                 <?php endwhile ?>
             </select>
         </fieldset>

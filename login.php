@@ -32,9 +32,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $errors[] = "Password is incorrect";
     }
 
-    // echo "<pre>";
-    // var_dump($errors);
-    // echo "</pre>";
+        // echo "<pre>";
+        // var_dump($errors);
+        // echo "</pre>";
 
     if(empty($errors)){
 
@@ -48,7 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         if($result -> num_rows){
             // validate password
             $user = mysqli_fetch_assoc($result);
-            // var_dump($user);
+            var_dump($user);
 
             // password verify - 2nd argument is the hashed password
             $auth = password_verify($password, $user['password']);
@@ -57,6 +57,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             if($auth){
                 // User auth is correct
+                session_start();
+
+                // Session array - SESSION is to save info in that super global
+                $_SESSION ['user'] = $user['email'];
+                $_SESSION ['login'] = true;
+
+                echo '<pre>';
+                var_dump($_SESSION);
+                echo '</pre>';
+
+                // enter to admin panel
+                header('Location: /admin');
+
+
             }else{
                 // User auth is not correct
                 $errors [] = "Password is not correct";
