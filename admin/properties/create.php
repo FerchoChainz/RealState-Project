@@ -1,15 +1,15 @@
 <?php
 
-require '../../includes/functions.php';
+require '../../includes/app.php';
 
-$auth = isAuth();
-
-if (!$auth) {
-    header('Location: /');
-}
+use App\Propertie;
 
 
-require '../../includes/config/database.php';
+isAuth();
+
+
+
+
 $db = DBconn();
 
 // query for sellers
@@ -31,6 +31,10 @@ $seller = '';
 
 // exect after user send form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $propertie = new Propertie($_POST);
+    
+    debbuging($propertie);
 
 
     // Sanitize inputs
@@ -168,7 +172,7 @@ addTemplate('header');
         <fieldset>
             <legend>Seller</legend>
 
-            <select name="seller">
+            <select name="sellers_id">
                 <option value="">--SELECT--</option>
                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <option

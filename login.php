@@ -1,7 +1,8 @@
 <?php 
 
 // connection
-require 'includes/config/database.php';
+require 'includes/app.php';
+
 
 $db = DBconn();
 
@@ -86,7 +87,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
 // header
-require 'includes/functions.php';
 addTemplate('header');
 ?>
 

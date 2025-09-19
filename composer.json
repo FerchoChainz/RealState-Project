@@ -1,0 +1,17 @@
+{
+    "name": "lazaroestrada/bienesraices",
+    "description": "Creando Proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "FerchoChainz",
+            "email": "tragicomedia9@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}

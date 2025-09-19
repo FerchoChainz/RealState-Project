@@ -1,19 +1,27 @@
 <?php
 
-require 'app.php';
+define('TEMPLATES_URL', __DIR__ . '/templates');
 
-function addTemplate(string $name, bool $main = false){
-    include TEMPLATES_URL ."/{$name}.php";
+define('FUNCTIONS_URL', __DIR__ . 'functions.php');
+
+function addTemplate(string $name, bool $main = false)
+{
+    include TEMPLATES_URL . "/{$name}.php";
 }
 
-function isAuth() : bool{
+function isAuth() {
     session_start();
 
-    $auth = $_SESSION['login'];
-    if($auth){
-        return true;
-    } 
-    
-    return false;
+    // if is not login
+    if (!$_SESSION['login']) {
+        header("Location: /");
+    }
 
+}
+
+function debbuging($variable){
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+    exit;
 }

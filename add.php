@@ -9,8 +9,8 @@ if (!$id) {
   header('Location: /');
 }
 
-// Import bd
-require 'includes/config/database.php';
+require 'includes/app.php';
+
 
 // connection
 $db = DBconn();
@@ -35,7 +35,6 @@ if(!$result -> num_rows){
 $propertie = mysqli_fetch_assoc($result);
 
 
-require 'includes/functions.php';
 addTemplate('header');
 ?>
 
