@@ -53,10 +53,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // password verify - 2nd argument is the hashed password
             $auth = password_verify($password, $user['password']);
 
-            var_dump($auth);
+            // var_dump($auth);
 
             if($auth){
                 // User auth is correct
+                session_start();
+
+                // Fill session array 
+                $_SESSION['user'] = $user['email'];
+                $_SESSION['login'] = true;
+
+                header('Location: /admin');
+                
+
             }else{
                 // User auth is not correct
                 $errors [] = "Password is not correct";

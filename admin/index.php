@@ -1,5 +1,13 @@
 <?php
 
+require '../includes/functions.php';
+
+$auth = isAuth();
+
+if(!$auth){
+    header('Location: /');
+}
+
 
 // Import DB
 require '../includes/config/database.php';
@@ -44,7 +52,7 @@ $result = $_GET['result'] ?? null;
  }
 
 // Show template
-require '../includes/functions.php';
+
 addTemplate('header');
 ?>
 
