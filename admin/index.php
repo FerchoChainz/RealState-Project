@@ -8,9 +8,6 @@ if(!$auth){
     header('Location: /');
 }
 
-// echo '<pre>';
-// var_dump($_SESSION);
-// echo '</pre>';
 
 // Import DB
 require '../includes/config/database.php';

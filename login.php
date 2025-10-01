@@ -54,9 +54,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // password verify - 2nd argument is the hashed password
             $auth = password_verify($password, $user['password']);
 
-            var_dump($auth);
+            var_dump($auth );
 
-            if($auth){
+            if($auth == true){
                 // User auth is correct
                 session_start();
 
@@ -68,8 +68,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 var_dump($_SESSION);
                 echo '</pre>';
 
+
                 // enter to admin panel
-                header('Location: /admin');
+                // header('Location: /admin');
 
 
             }else{

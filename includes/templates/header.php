@@ -2,9 +2,9 @@
 
 if(!isset($_SESSION)){
   session_start();
-  }
+}
 
-  $auth = $_SESSION['login'] ?? false;
+$auth = $_SESSION['login'] ?? false;
 
   // var_dump($auth);
 
