@@ -1,5 +1,6 @@
 <?php
 
+require '../includes/app.php';
 
 // Import DB
 $db = DBconn();

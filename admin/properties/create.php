@@ -29,9 +29,6 @@ $seller = '';
 // exect after user send form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $propertie = new Propertie($_POST);
-    
-    debbuging($propertie);
 
     $propertie = new Propertie($_POST);
     
