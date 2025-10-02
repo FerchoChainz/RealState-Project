@@ -3,7 +3,6 @@
 // connection
 require 'includes/app.php';
 
-
 $db = DBconn();
 
 
@@ -54,24 +53,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             // password verify - 2nd argument is the hashed password
             $auth = password_verify($password, $user['password']);
 
-            var_dump($auth );
+            // var_dump($auth);
 
             if($auth == true){
                 // User auth is correct
                 session_start();
 
-                // Session array - SESSION is to save info in that super global
-                $_SESSION ['user'] = $user['email'];
-                $_SESSION ['login'] = true;
+                // Fill session array 
+                $_SESSION['user'] = $user['email'];
+                $_SESSION['login'] = true;
 
-                echo '<pre>';
-                var_dump($_SESSION);
-                echo '</pre>';
-
-
-                // enter to admin panel
-                // header('Location: /admin');
-
+                header('Location: /admin');
+                
 
             }else{
                 // User auth is not correct
@@ -88,6 +81,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
 // header
+
 addTemplate('header');
 ?>
 

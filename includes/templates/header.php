@@ -1,15 +1,14 @@
 <?php 
 
+
 if(!isset($_SESSION)){
   session_start();
+  
 }
 
 $auth = $_SESSION['login'] ?? false;
 
-  // var_dump($auth);
-
-?> 
-
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,11 +40,10 @@ $auth = $_SESSION['login'] ?? false;
               <a href="adds.php">Advertisements</a>
               <a href="blog.php">Blog</a>
               <a href="contact.php">Contact</a>
- 
 
               <?php if($auth): ?>
-                  <a href="/log-out.php">Log Out</a>
-              <?php endif; ?>
+                  <a href="logout.php">Logout</a>
+              <?php endif ?>
             </nav>
           </div>
         </div>

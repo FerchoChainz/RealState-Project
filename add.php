@@ -11,7 +11,6 @@ if (!$id) {
 
 require 'includes/app.php';
 
-
 // connection
 $db = DBconn();
 
@@ -33,6 +32,7 @@ if(!$result -> num_rows){
 // echo "</pre>";
 
 $propertie = mysqli_fetch_assoc($result);
+
 
 
 addTemplate('header');

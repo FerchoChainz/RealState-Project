@@ -1,14 +1,9 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "8902fa2cdb94bf9fb959c5fc905c60a5",
     "packages": [
         {
             "name": "intervention/gif",
             "version": "4.2.2",
+            "version_normalized": "4.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/gif.git",
@@ -29,7 +24,9 @@
                 "slevomat/coding-standard": "~8.0",
                 "squizlabs/php_codesniffer": "^3.8"
             },
+            "time": "2025-03-29T07:46:21+00:00",
             "type": "library",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Intervention\\Gif\\": "src"
@@ -72,11 +69,12 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-03-29T07:46:21+00:00"
+            "install-path": "../intervention/gif"
         },
         {
             "name": "intervention/image",
             "version": "3.11.4",
+            "version_normalized": "3.11.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
@@ -103,7 +101,9 @@
             "suggest": {
                 "ext-exif": "Recommended to be able to read EXIF data properly."
             },
+            "time": "2025-07-30T13:13:19+00:00",
             "type": "library",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Intervention\\Image\\": "src"
@@ -148,16 +148,9 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2025-07-30T13:13:19+00:00"
+            "install-path": "../intervention/image"
         }
     ],
-    "packages-dev": [],
-    "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
-    "prefer-stable": false,
-    "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "dev": true,
+    "dev-package-names": []
 }

@@ -8,7 +8,6 @@ if(!$auth){
     header('Location: /');
 }
 
-
 // Validate valid ID
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
