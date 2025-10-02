@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-require 'includes/functions.php';
+require 'includes/app.php';
 addTemplate('header',$main = true);
 ?>
 

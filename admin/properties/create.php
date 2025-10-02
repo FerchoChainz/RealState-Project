@@ -1,26 +1,21 @@
 <?php
 
-require '../../includes/functions.php';
+require '../../includes/app.php';
+
+use App\Propertie;
 
 $auth = isAuth();
-
-if(!$auth){
-    header('Location: /');
-}
-
-
-require '../../includes/config/database.php';
 $db = DBconn();
 
 // query for sellers
 $query = "SELECT * FROM sellers";
 $result = mysqli_query($db, $query);
 // array error logs
-$errors = [];
+$errors = Propertie::getErrors();
+
 
 
 // Log errors
-
 $tittle = '';
 $price = '';
 $description = '';
@@ -32,65 +27,20 @@ $seller = '';
 // exect after user send form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    $propertie = new Propertie($_POST);
 
-    // Sanitize inputs
-    $tittle = mysqli_real_escape_string($db,$_POST['tittle']); 
-    $price = mysqli_real_escape_string($db,$_POST['price']); 
-    $description = mysqli_real_escape_string($db,$_POST['description']); 
-    $rooms = mysqli_real_escape_string($db,$_POST['rooms']); 
-    $wc = mysqli_real_escape_string($db,$_POST['wc']); 
-    $parking = mysqli_real_escape_string($db,$_POST['parking']); 
-    $seller = mysqli_real_escape_string($db,$_POST['seller']); 
-    $created = date('Y/m/d');
-
-    // asign files to a variable
-    $image = $_FILES['image'];
-    var_dump($image['name']);
-
-
-    if (!$tittle) {
-        $errors[] = 'Tittle cant be empty';
-    }
-
-    if (!$price) {
-        $errors[] = 'Price cant be empty';
-    }
-
-    if (!$description) {
-        $errors[] = 'Description cant be empty and it must be at least 50 characters';
-    }
-
-    if (!$rooms) {
-        $errors[] = 'Rooms number cant be empty';
-    }
-
-    if (!$wc) {
-        $errors[] = 'WC number cant be empty';
-    }
-
-    if (!$parking) {
-        $errors[] = 'Parking lot spots cant be empty';
-    }
-
-    if (!$seller) {
-        $errors[] = 'Select one selller';
-    }
-
-    if(!$image['name'] || $image['error']){
-        $errors[] = 'Image is mandatory';
-    }
-
-    // Image size validator (1 MB max)
-    $messure = 1000 * 1000;
-
-    if($image['size'] > $messure){
-        $errors[] = 'Image is so big, upload another';
-    }
-
-
+    $errors = $propertie->validate();
+    
+    
     // review if error logs is empty
     if (empty($errors)) {
+        $propertie->saveData();
+    
+        // asign files to a variable
+        $image = $_FILES['image'];
+        var_dump($image['name']);
 
+        
         // uploading files
         // make directory
         $dirImages = '../../images/';
@@ -107,9 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // upload image
         move_uploaded_file($image['tmp_name'], $dirImages . $nameImage);
 
-        
-        // Insert DB
-        $query = "INSERT INTO properties (tittle, price, image, description, rooms, wc, parking, created, sellers_id) VALUES ('$tittle', '$price', '$nameImage', '$description', '$rooms', '$wc', '$parking', '$created' , '$seller')";
 
 
         $result = mysqli_query($db, $query);
@@ -169,7 +116,7 @@ addTemplate('header');
         <fieldset>
             <legend>Seller</legend>
 
-            <select name="seller">
+            <select name="sellers_id">
                 <option value="">--SELECT--</option>
                 <?php while($row = mysqli_fetch_assoc($result)) :?>
                     <option 

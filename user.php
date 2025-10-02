@@ -1,7 +1,7 @@
 <?php 
 
 // Import conn
-require 'includes/config/database.php';
+require 'includes/functions.php';
 $db = DBconn();
 
 // Create email and pass

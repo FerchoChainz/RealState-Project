@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'lazaroestrada/bienesraices',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'f227e714d292a9e10085a2300f6ced1cc6f4d366',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => null,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'lazaroestrada/bienesraices' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'f227e714d292a9e10085a2300f6ced1cc6f4d366',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => null,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -1,6 +1,6 @@
 <?php
 // Import bd
-require __DIR__ . '/../config/database.php';
+
 
 // connection
 $db = DBconn();

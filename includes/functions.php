@@ -1,6 +1,9 @@
 <?php
 
-require 'app.php';
+
+define('TEMPLATES_URL', __DIR__ . '/templates');
+
+define('FUNCTIONS_URL',__DIR__ . 'functions.php');
 
 function addTemplate(string $name, bool $main = false){
     include TEMPLATES_URL ."/{$name}.php";
@@ -17,4 +20,11 @@ function isAuth() : bool {
 
     return false;
 
+}
+
+function debbuger($variable){
+    echo '<pre>';
+    var_dump($variable);
+    echo '</pre>';
+    exit;
 }

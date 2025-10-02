@@ -1,7 +1,7 @@
 <?php
 
 function DBconn() : mysqli{
-    $db =mysqli_connect('localhost','root', '',
+    $db =new mysqli('localhost','root', '',
 'realstate_crud');
 
 if(!$db){
