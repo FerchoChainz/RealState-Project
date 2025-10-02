@@ -1,16 +1,13 @@
 <?php
 
-require '../includes/functions.php';
+require '../includes/app.php';
 
-$auth = isAuth();
+isAuth();
 
-if(!$auth){
-    header('Location: /');
-}
+
 
 
 // Import DB
-require '../includes/config/database.php';
 $db = DBconn();
 
 // Query

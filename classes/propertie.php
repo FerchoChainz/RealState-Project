@@ -37,7 +37,7 @@ class Propertie
         $this->id = $args['id'] ?? '';
         $this->tittle = $args['tittle'] ?? '';
         $this->price = $args['price'] ?? '';
-        $this->image = $args['image'] ?? 'image.jpg';
+        $this->image = $args['image'] ?? '';
         $this->description = $args['description'] ?? '';
         $this->rooms = $args['rooms'] ?? '';
         $this->wc = $args['wc'] ?? '';
@@ -54,7 +54,6 @@ class Propertie
         // Takes an array and make plain text with a separator, in this case ', ' to separate every key
         // $string = join(', ',array_values($atributes));
 
-
         // Insert DB
         $query = "INSERT INTO properties (";
         $query .= join(', ', array_keys($atributes));
@@ -66,7 +65,11 @@ class Propertie
 
 
         $result = self::$db->query($query);
-        debbuger($result);
+        if ($result) {
+            // Redirection
+            header('location: /admin?result=1');
+        }
+        // debbuger($result);
     }
 
     //   identify and join atributes of DB
@@ -129,17 +132,18 @@ class Propertie
         self::$errors[] = 'Select one selller';
     }
 
-    // if(!$this->image['name'] || $this->image['error']){
-    //     self::$errors[] = 'Image is mandatory';
-    // }
+    if(!$this->image){
+        self::$errors[] = 'Image is mandatory';
+    }
 
-    // // Image size validator (1 MB max)
-    // $messure = 1000 * 1000;
-
-    // if($$this->mage['size'] > $messure){
-    //     self::$errors[] = 'Image is so big, upload another';
-    // }
 
     return self::$errors;
+    }
+
+
+    public function setImage($image){
+        if($image){
+            $this->image = $image;
+        }
     }
 }

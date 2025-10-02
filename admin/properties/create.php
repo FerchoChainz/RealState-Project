@@ -3,13 +3,15 @@
 require '../../includes/app.php';
 
 use App\Propertie;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager as Image;
 
 $auth = isAuth();
 $db = DBconn();
 
 // query for sellers
 $query = "SELECT * FROM sellers";
-$result = mysqli_query($db, $query);
+$resultSellers = mysqli_query($db, $query);
 // array error logs
 $errors = Propertie::getErrors();
 
@@ -28,43 +30,41 @@ $seller = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $propertie = new Propertie($_POST);
+    
+    // This code manage de upload files or images
+    $nameImage = md5(uniqid(rand(), true)) . ".jpg";
+    if($_FILES['image']['tmp_name']){
+        $manager = new Image(Driver::class); 
+        $image = $manager->read($_FILES['image']['tmp_name'])->cover(800,600);
+        $propertie->setImage($nameImage);
+
+        // debbuger($image);
+    }
+
 
     $errors = $propertie->validate();
-    
+
     
     // review if error logs is empty
     if (empty($errors)) {
-        $propertie->saveData();
-    
-        // asign files to a variable
-        $image = $_FILES['image'];
-        var_dump($image['name']);
-
         
-        // uploading files
         // make directory
-        $dirImages = '../../images/';
-
-        if(!is_dir($dirImages)){
+        
+        if(!is_dir(DIR_IMAGES)){
             // if not exist, make it
-            mkdir($dirImages);
-        }
-
-        // generate unique name to images
-        $nameImage = md5(uniqid(rand(), true)) . ".jpg";
-        // var_dump($nameImage);
-
-        // upload image
-        move_uploaded_file($image['tmp_name'], $dirImages . $nameImage);
+            mkdir(DIR_IMAGES);
+        }        
 
 
-
-        $result = mysqli_query($db, $query);
-
-        if ($result) {
-            // Redirection
-            header('location: /admin?result=1');
-        }
+        // Save image in server
+        $image->save(DIR_IMAGES . $nameImage);
+        
+        $result = $propertie->saveData();
+        // debbuger($result);
+        // if ($result) {
+        //     // Redirection
+        //     header('location: /admin?result=1');
+        // }
     }
 }
 
@@ -118,7 +118,7 @@ addTemplate('header');
 
             <select name="sellers_id">
                 <option value="">--SELECT--</option>
-                <?php while($row = mysqli_fetch_assoc($result)) :?>
+                <?php while($row = mysqli_fetch_assoc($resultSellers)) :?>
                     <option 
                     <?php echo $seller === $row['id'] ? 'selected' :'' ;?>
                         value="<?php echo $row['id'] ?>">
