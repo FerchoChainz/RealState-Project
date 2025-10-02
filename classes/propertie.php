@@ -146,4 +146,52 @@ class Propertie
             $this->image = $image;
         }
     }
+
+
+    // list all properties
+    // in this function had a query, this return an assoc array
+    public static function all(){
+        $query = "SELECT * FROM properties";
+
+        // take this query in assoc array form to the method consult
+        self::consultSQL($query);
+
+    }
+
+
+    public static function consultSQL($query){
+        // consult bd
+        $result = self::$db->query($query);
+
+        // iterate results
+        // this a assoc array, but we created a new method to convert arrays to objects
+        $array = [];
+        while($register = $result->fetch_assoc()){
+            $array[] = self::createObjects($register);
+        }
+
+        // clear memory 
+        $result->free();
+
+
+        // return results
+        // return an array full of all the objects converted
+        return $array;
+    }
+
+
+    // In activeRecord you cant use arrays, you must have to use objects
+    // this method convert array in objects
+    protected static function createObjects($register){
+        $object = new self;
+
+        // this code check and map the data from arrays to objects
+        foreach($register as $key => $value){
+            if(property_exists($object, $key)){
+                $object->$key = $value;
+            }
+        }
+
+        return $object;
+    }
 }

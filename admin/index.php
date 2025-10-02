@@ -2,15 +2,16 @@
 
 require '../includes/app.php';
 
+use App\Propertie;
+
+isAuth();
+
+
 // Import DB
 $db = DBconn();
 
-// Query
-$query = "SELECT * FROM properties";
-
-
-// Consult BD
-$queryResult = mysqli_query($db, $query);
+// Method to get all properties with activeRecord
+$properties = Propertie::all();
 
 
 
