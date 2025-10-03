@@ -43,7 +43,7 @@ class Propertie
         $this->wc = $args['wc'] ?? '';
         $this->parking = $args['parking'] ?? '';
         $this->created = date('Y/m/d');
-        $this->sellers_id = $args['sellers_id'] ?? '';
+        $this->sellers_id = $args['sellers_id'] ?? 1;
     }
 
     public function saveData()
@@ -72,7 +72,7 @@ class Propertie
         // debbuger($result);
     }
 
-    //   identify and join atributes of DB
+    // identify and join atributes of DB
     public function atributes()
     {
         $atributes = [];
@@ -142,6 +142,18 @@ class Propertie
 
 
     public function setImage($image){
+        // delete previous image
+
+        if($this->id){
+            // check if file exists 
+            $exist = file_exists(DIR_IMAGES . $this->image);
+
+            if($exist){
+                unlink(DIR_IMAGES . $this->image);
+            }
+        }
+
+
         if($image){
             $this->image = $image;
         }
@@ -154,11 +166,25 @@ class Propertie
         $query = "SELECT * FROM properties";
 
         // take this query in assoc array form to the method consult
-        self::consultSQL($query);
+        $resutl = self::consultSQL($query);
+
+       return $resutl; 
+    }
+
+    // search a register by ID
+    public static function find($id){
+        $query = "SELECT * FROM properties WHERE id = $id ";
+
+        // re-use the methods to convert arrays to objects
+        $result = self::consultSQL($query);
+
+
+        return(array_shift($result));
 
     }
 
 
+    // HERE CONVERT ARRAYS TO OBJECTS
     public static function consultSQL($query){
         // consult bd
         $result = self::$db->query($query);
@@ -193,5 +219,16 @@ class Propertie
         }
 
         return $object;
+    }
+
+
+    // sync the object in memory with the changes made by user admin in update
+    public function sync($args = []){
+
+        foreach($args as $key => $value){
+            if(property_exists($this, $key) && !is_null($value)){
+                $this->$key = $value;
+            }
+        }
     }
 }

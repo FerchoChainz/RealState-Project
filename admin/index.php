@@ -76,24 +76,24 @@ addTemplate('header');
 
 
          <tbody> <!-- Show results -->
-            <?php while($propertie = mysqli_fetch_assoc($queryResult)): ?>
+            <?php foreach($properties as $propertie): ?>
             <tr>
-                <td><?php echo $propertie['id'];?></td>
-                <td><?php echo $propertie['tittle'];?></td>
-                <td><img src="/images/<?php echo $propertie['image']; ?>" alt="" class="table-img"></td>
-                <td><?php echo $propertie['price'];?></td>
+                <td><?php echo $propertie->id;?></td>
+                <td><?php echo $propertie->tittle;?></td>
+                <td><img src="/images/<?php echo $propertie->image; ?>" alt="" class="table-img"></td>
+                <td><?php echo $propertie->price;?></td>
                 <td>
                     <form action="" method="POST" class="w-100">
                        <input type="submit" value="Delete" class="red-btn-b">
-                       <input type="hidden" name="id" value="<?php echo $propertie['id'];?>">
+                       <input type="hidden" name="id" value="<?php echo $propertie->id;?>">
                     </form>
 
 
-                    <a href="admin/properties/update.php?id=<?php echo $propertie['id']; ?>" class="blue-btn-b">Update</a>
+                    <a href="admin/properties/update.php?id=<?php echo $propertie->id; ?>" class="blue-btn-b">Update</a>
                 </td>
             </tr>
 
-            <?php endwhile; ?>
+            <?php endforeach; ?>
          </tbody>
     </table>
 

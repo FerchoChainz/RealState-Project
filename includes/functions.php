@@ -30,3 +30,11 @@ function debbuger($variable){
     echo '</pre>';
     exit;
 }
+
+
+// scape HTML / sanitize HTML -- Helper
+function s($html):string{
+    $s = htmlspecialchars($html);
+
+    return $s;
+}
