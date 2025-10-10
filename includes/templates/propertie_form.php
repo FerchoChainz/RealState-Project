@@ -40,14 +40,14 @@
 
     <select name="sellers_id">
         <option value="">--SELECT--</option>
-        <?php while ($row = mysqli_fetch_assoc($resultSellers)) : ?>
+        <?//php while ($row = mysqli_fetch_assoc($resultSellers)) : ?>
             <option
-                <?php echo $seller === $row['id'] ? 'selected' : ''; ?>
-                value="<?php echo $row['id'] ?>">
+                <?//php echo $seller === $row['id'] ? 'selected' : ''; ?>
+                value="<?//php echo $row['id'] ?>">
 
 
-                <?php echo $row['name'] . " " . $row['last_name']; ?>
+                <?//php echo $row['name'] . " " . $row['last_name']; ?>
             </option>
-        <?php endwhile ?>
+        <?php //endwhile ?>
     </select>
 </fieldset> -->

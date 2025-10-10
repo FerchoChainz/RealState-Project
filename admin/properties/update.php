@@ -60,24 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
+
     // review if error logs is empty
     if (empty($errors)) {
 
+        // save the image 
+        $image->save(DIR_IMAGES . $nameImage);
 
-
-        exit;
-
-        // Update DB
-        $query = " UPDATE properties SET tittle = '$tittle', price = '$price', image = '$nameImage', description = '$description', rooms = $rooms, wc = $wc, parking = $parking, sellers_id = $seller WHERE id = $id";
-
-        // echo $query;
-
-        $result = mysqli_query($db, $query);
-
-        if ($result) {
-            // Redirection
-            header('location: /admin?result=2');
-        }
+        $propertie -> saveUpdate();
     }
 }
 

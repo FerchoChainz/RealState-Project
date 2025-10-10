@@ -46,6 +46,43 @@ class Propertie
         $this->sellers_id = $args['sellers_id'] ?? 1;
     }
 
+    public function saveUpdate(){
+        if(isset($this -> id)){
+            // update register if exist 
+            $this -> update();
+        } else{
+            // create new register
+            $this->saveData();
+        }
+    }
+
+    public function update(){
+        $atributes = $this->sanitizeData();
+
+        // this join atributes and values
+        $values = [];
+
+        foreach ($atributes as $key => $value) {
+            $values[] = "{$key}='{$value}'";
+        }
+
+        $query = " UPDATE properties SET ";
+        $query .= join(', ',$values);
+        // join convert the array values into like a sql query sentence
+        // we have the key and value y plain string separated by ','
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
+        
+        $result = self::$db->query($query);
+
+        if($result){
+            header('Location: /admin?result=2');
+        }
+
+        return $result;
+
+    }
+
     public function saveData()
     {
         // Sanitize data
@@ -69,7 +106,7 @@ class Propertie
             // Redirection
             header('location: /admin?result=1');
         }
-        // debbuger($result);
+        // debbuger($result)
     }
 
     // identify and join atributes of DB
@@ -144,7 +181,7 @@ class Propertie
     public function setImage($image){
         // delete previous image
 
-        if($this->id){
+        if(isset($this->id)){
             // check if file exists 
             $exist = file_exists(DIR_IMAGES . $this->image);
 
