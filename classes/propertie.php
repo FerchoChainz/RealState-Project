@@ -33,4 +33,43 @@ class Propertie extends ActiveRecord{
         $this->created = date('Y/m/d');
         $this->sellers_id = $args['sellers_id'] ?? '';
     }
+
+    public function validate()
+    {
+        if (!$this->tittle) {
+            self::$errors[] = 'Tittle cant be empty';
+        }
+
+        if (!$this->price) {
+            self::$errors[] = 'Price cant be empty';
+        }
+
+        //stren(description)< 50
+        if (!$this->description) {
+            self::$errors[] = 'Description cant be empty and it must be at least 50 characters';
+        }
+
+        if (!$this->rooms) {
+            self::$errors[] = 'Rooms number cant be empty';
+        }
+
+        if (!$this->wc) {
+            self::$errors[] = 'WC number cant be empty';
+        }
+
+        if (!$this->parking) {
+            self::$errors[] = 'Parking lot spots cant be empty';
+        }
+
+        if (!$this->sellers_id) {
+            self::$errors[] = 'Select one selller';
+        }
+
+        if (!$this->image) {
+            self::$errors[] = 'Image is mandatory';
+        }
+
+
+        return self::$errors;
+    }
 }
