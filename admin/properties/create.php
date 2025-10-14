@@ -3,17 +3,19 @@
 require '../../includes/app.php';
 
 use App\Propertie;
+use App\Seller;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager as Image;
 
 $auth = isAuth();
-$db = DBconn();
 
 $propertie = new Propertie();
 
-// query for sellers
-$query = "SELECT * FROM sellers";
-$resultSellers = mysqli_query($db, $query);
+// query to get all from sellers
+$sellers = Seller::all();
+
+
+
 // array error logs
 $errors = Propertie::getErrors();
 
@@ -49,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // if not exist, make it
             mkdir(DIR_IMAGES);
         }
-
 
         // Save image in server
         $image->save(DIR_IMAGES . $nameImage);

@@ -3,6 +3,7 @@
 require '../includes/app.php';
 
 use App\Propertie;
+use App\Seller;
 
 isAuth();
 
@@ -12,6 +13,10 @@ $db = DBconn();
 
 // Method to get all properties with activeRecord
 $properties = Propertie::all();
+$sellers = Seller::all();
+
+// debbuger($properties);
+
 
 
 
@@ -25,22 +30,11 @@ $result = $_GET['result'] ?? null;
 
     if($id){
 
-        // delete file
-        $query = "SELECT image FROM properties WHERE id = $id";
-        $result = mysqli_query($db, $query);
-        $propertie = mysqli_fetch_assoc($result);
-        var_dump($propertie['image']);
+        $propertie = Propertie::find($id);
 
-        unlink('../images/' . $propertie['image'] );
+        $propertie->delete();
 
-        // delete propertie
-        $query = "DELETE FROM properties WHERE id = $id";
-
-        $result = mysqli_query($db, $query); 
-
-        if($result){
-            header('location: /admin?result=3');
-        }
+        
     }
  }
 

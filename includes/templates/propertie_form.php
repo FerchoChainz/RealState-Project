@@ -35,19 +35,18 @@
         value="<?php echo s($propertie->parking); ?>">
 </fieldset>
 
-<!-- <fieldset>
+<fieldset>
     <legend>Seller</legend>
+        <label for="seller">Seller</label>
+        <select name="propertie[sellers_id]" id="seller">
+            <option value="selected value">--Select one seller--</option>
 
-    <select name="sellers_id">
-        <option value="">--SELECT--</option>
-        <?//php while ($row = mysqli_fetch_assoc($resultSellers)) : ?>
-            <option
-                <?//php echo $seller === $row['id'] ? 'selected' : ''; ?>
-                value="<?//php echo $row['id'] ?>">
+            <?php foreach($sellers as $seller){ ?>
+                <option
+                <?php echo $propertie->sellers_id === $seller->id ? 'Selected' : ''; ?>
+                value="<?php echo s($seller->id); ?>"><?php echo s($seller->name) . " " . s($seller->last_name); ?></option>
+                <?php } ?>
 
+        </select>
 
-                <?//php echo $row['name'] . " " . $row['last_name']; ?>
-            </option>
-        <?php //endwhile ?>
-    </select>
-</fieldset> -->
+</fieldset>
