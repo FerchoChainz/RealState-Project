@@ -105,7 +105,7 @@ class ActiveRecord{
     public function atributes()
     {
         $atributes = [];
-        foreach (self::$DBcols as $column) {
+        foreach (static::$DBcols as $column) {
             if ($column == 'id') continue;
             $atributes[$column] = $this->$column;
         }
@@ -199,7 +199,7 @@ class ActiveRecord{
         // this a assoc array, but we created a new method to convert arrays to objects
         $array = [];
         while ($register = $result->fetch_assoc()) {
-            $array[] = self::createObjects($register);
+            $array[] = static::createObjects($register);
         }
 
         // clear memory 

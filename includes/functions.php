@@ -38,3 +38,41 @@ function s($html):string{
 
     return $s;
 }
+
+// Convert type currency
+
+function currency($number){
+    $locale = 'es_MX';
+    $formatter = new NumberFormatter($locale,NumberFormatter::CURRENCY);
+
+    echo $formatter->formatCurrency($number, 'MXN');
+}
+
+
+// TO DO: IMPLEMENT THE TYPE OF FORMAT PHONE NUMBER
+function formattingPhone($phone){
+    
+    // Pass phone number in preg_match function
+    if(preg_match(
+        '/^\+[0-9]([0-9]{3})([0-9]{3})([0-9]{4})$/', 
+    $phone, $value)) {
+    
+        // Store value in format variable
+        $format = $value[1] . '-' . 
+            $value[2] . '-' . $value[3];
+    }
+    else {
+       
+        // If given number is invalid
+        echo "Invalid phone number <br>";
+    }
+    
+}
+
+// validate type content 
+function validateTypeContent($type){
+    $types = ['seller','propertie'];
+
+    // search a string o value in array.
+    return in_array($type, $types);
+}

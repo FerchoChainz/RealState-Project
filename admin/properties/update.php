@@ -1,6 +1,7 @@
 <?php
 
 use App\Propertie;
+use App\Seller;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager as Image;
 
@@ -23,11 +24,9 @@ $db = DBconn();
 // Instance of class Propertie
 $propertie =  Propertie::find($id);
 
+// query to get all sellers
+$sellers = Seller::all();
 
-
-// query for sellers
-$query = "SELECT * FROM sellers";
-$resultSellers = mysqli_query($db, $query);
 // array error logs
 $errors = [];
 
@@ -63,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // review if error logs is empty
     if (empty($errors)) {
-
-        // save the image 
-        $image->save(DIR_IMAGES . $nameImage);
-
-        $propertie -> saveUpdate();
+        if ($_FILES['propertie']['tmp_name']['image']) {
+            // save the image 
+            $image->save(DIR_IMAGES . $nameImage);
+        }
+        $propertie->saveUpdate();
     }
 }
 
@@ -90,7 +89,7 @@ addTemplate('header');
 
     <form class="form" method="POST" enctype="multipart/form-data">
 
-        <?php include '../../includes/templates/propertie_form.php'?>
+        <?php include '../../includes/templates/propertie_form.php' ?>
 
         <input type="submit" value="Update Propertie" class="button green-btn">
     </form>
