@@ -76,3 +76,31 @@ function validateTypeContent($type){
     // search a string o value in array.
     return in_array($type, $types);
 }
+
+function showDialogMessage($code){
+    $message = [
+        'message'=> false,
+        'class'=> ''
+    ];
+
+    switch ($code) {
+        case 1:
+            $message['message'] = 'Created Succesfully';
+            $message['class'] = 'alert succes';
+            break;
+        case 2:
+            $message['message'] = 'Updated Succesfully';
+            $message['class'] = 'alert updated';
+            break;
+        case 3: 
+            $message['message'] = 'Deleted Succesfully';
+            $message['class'] = 'alert deleted';
+            break;
+        default:
+            $message['message'] = false;
+            break;
+    }
+
+
+    return $message;
+}

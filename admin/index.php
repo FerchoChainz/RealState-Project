@@ -53,13 +53,13 @@ addTemplate('header');
 <main class="container section">
     <h1>Admin RealState</h1>
 
-    <?php if(intval($result) === 1): ?>
-        <p class="alert succes">Created successfully</p>
-    <?php elseif(intval($result) === 2 ):?>    
-        <p class="alert updated">Updated successfully</p>
-    <?php elseif(intval($result) === 3 ):?>    
-        <p class="alert deleted">Deleted successfully</p>
-    <?php endif; ?>
+    <?php 
+        $message = showDialogMessage(intval($result));
+        if($message['message']){ ?>
+            <p class="<?php echo $message['class']; ?> ">
+            <?php echo s($message['message']); ?>
+            </p>
+    <?php } ?>
 
     <a href="/admin/properties/create.php" class="button green-btn">New Propertie</a>
     <a href="/admin/sellers/create.php" class="button green-btn">New Seller</a>
