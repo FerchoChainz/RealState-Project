@@ -24,7 +24,7 @@ $errors = Propertie::getErrors();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $propertie = new Propertie($_POST['propertie']);
-
+    debbuger($propertie);
 
     // This code manage de upload files or images
     $nameImage = md5(uniqid(rand(), true)) . ".jpg";

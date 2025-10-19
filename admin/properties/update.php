@@ -18,7 +18,7 @@ if (!$id) {
     header('Location: /admin');
 }
 
-$db = DBconn();
+// $db = DBconn();
 
 
 // Instance of class Propertie

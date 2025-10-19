@@ -1,19 +1,40 @@
 <?php 
 
 require '../../includes/app.php';
-
 use App\Seller;
-
 isAuth();
 
-$seller = new Seller();
-// debbuger($seller);
+// Validate id is valid
+$id = $_GET['id'];
+$id = filter_var($id, FILTER_VALIDATE_INT);
+
+if(!$id){
+    header('Location: /admin');
+}
+
+
+// get seller array from DB 
+$seller = Seller::find($id);
+
 
 
 // array error logs
 $errors = Seller::getErrors();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    // assign values 
+    $args = $_POST['seller'];
+    
+    // sync memory object
+    $seller->sync($args);
+
+    // validate
+    $errors = $seller->validate();
+
+    if(empty($errors)){
+        $seller->saveUpdate();
+    }
 
 }
 
@@ -32,7 +53,7 @@ addTemplate('header');
         </div>
     <?php endforeach; ?>
 
-    <form class="form" method="POST" action="/admin/sellers/create.php">
+    <form class="form" method="POST" enctype="multipart/form-data§">
 
         <?php include '../../includes/templates/seller_form.php' ?>
 
@@ -41,4 +62,4 @@ addTemplate('header');
 
 </main>
 
-<?php addTemplate('footer')?>
+<?php addTemplate('footer')?>  

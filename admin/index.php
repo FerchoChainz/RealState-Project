@@ -54,11 +54,11 @@ addTemplate('header');
     <h1>Admin RealState</h1>
 
     <?php if(intval($result) === 1): ?>
-        <p class="alert succes">Ad created successfully</p>
+        <p class="alert succes">Created successfully</p>
     <?php elseif(intval($result) === 2 ):?>    
-        <p class="alert updated">Ad Updated successfully</p>
+        <p class="alert updated">Updated successfully</p>
     <?php elseif(intval($result) === 3 ):?>    
-        <p class="alert deleted">Ad deleted successfully</p>
+        <p class="alert deleted">Deleted successfully</p>
     <?php endif; ?>
 
     <a href="/admin/properties/create.php" class="button green-btn">New Propertie</a>
@@ -127,12 +127,12 @@ addTemplate('header');
                 <td>
                     <form action="" method="POST" class="w-100">
                        <input type="submit" value="Delete" class="red-btn-b">
-                       <input type="hidden" name="id" value="<?php echo $propertie->id;?>">
+                       <input type="hidden" name="id" value="<?php echo $seller->id;?>">
                        <input type="hidden" name="type" value="seller">
                     </form>
 
 
-                    <a href="admin/sellers/update.php?id=<?php echo $propertie->id; ?>" class="blue-btn-b">Update</a>
+                    <a href="admin/sellers/update.php?id=<?php echo $seller->id; ?>" class="blue-btn-b">Update</a>
                 </td>
             </tr>
 

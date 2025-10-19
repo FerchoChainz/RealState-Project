@@ -15,6 +15,16 @@ $errors = Seller::getErrors();
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
+    $seller = new Seller($_POST['seller']);
+    // debbuger($seller);
+
+    
+    $errors = $seller->validate();
+
+    if(empty($errors)){
+        $seller->saveData();
+    }
+
 }
 
 addTemplate('header');
