@@ -20,6 +20,8 @@ function isAuth() : bool {
         return true;
     }
 
+    header('Location: /');
+
     return false;
 
 }
