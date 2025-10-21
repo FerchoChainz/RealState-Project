@@ -34,8 +34,6 @@ addTemplate('header',$main = true);
         <h2>Houses and Departments on sale!</h2>
 
         <?php
-
-          $limit = 3;
           
           include 'includes/templates/ads.php';
         ?>

@@ -168,7 +168,17 @@ class ActiveRecord{
     {
         $query = "SELECT * FROM " . static::$table;
 
-        // debbuger($query);
+        // take this query in assoc array form to the method consult
+        $resutl = self::consultSQL($query);
+
+        return $resutl;
+    }
+
+
+    // Get determinated number of registers  
+    public static function get($cant){
+        $query = "SELECT * FROM " . static::$table . " LIMIT " . $cant;
+
 
         // take this query in assoc array form to the method consult
         $resutl = self::consultSQL($query);

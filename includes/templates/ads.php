@@ -3,9 +3,12 @@
 
 use App\Propertie;
 
-$properties = Propertie::all();
 
-// debbuger($properties);
+if($_SERVER['SCRIPT_NAME'] === '/adds.php'){
+  $properties = Propertie::all();
+} else{
+  $properties = Propertie::get(3);
+}
 
 ?>
 
